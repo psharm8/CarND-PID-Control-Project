@@ -2,7 +2,32 @@
 Self-Driving Car Engineer Nanodegree Program
 
 ---
+##
+[Video of Simulator](https://github.com/psharm8/CarND-PID-Control-Project/blob/master/Video.mp4)
 
+ Rubric Points
+---
+
+* **_Describe the effect each of the P, I, D components had in your implementation._**
+  * The 'P' or proportional component changes the steering of the car based on how far the car is from the center (CTE).
+  * The 'D' or differential component changes the direction of the car based on the change from previous CTE. This is useful to prevent the car from overshooting and swinging around the center. It reduces the steering angle as the car approaches the center.
+  * The 'I' or integral component is used to account for any initial steering bias. In this project the car starts with a steering turned to right, hence we need a small 'I'
+ component to account for the initial turn.  
+
+I also used the PID controller for the throttle. To drive the throttle value, I used the absolute steering angle (reported by the steering PID controller) as the CTE. The idea was to reduce the speed if the car is changing direction.
+I used a small 'P' value to have a reduced speed if the car is turning at a constant steering angle. However, there is a larger 'D' value which ensures that the speed is dropped proportionally if steering angle is changing. The 'I' component is set to 0 since there is no bias to account for.
+
+* **_Describe how the final hyperparameters were chosen._**
+
+I chose to tune the parameters manually. 
+First, I kept the throttle constant and started varying the 'P' and 'D' component till I could get the car to center quickly. Further down the track, the car started swinging. 'I' value stabilized that.
+Then, I started to control the throttle, as the speed increased the car became very unstable and started going over the ledges. Due to this, I had to re-tune the steering parameters which work reasonable with higher speed.
+
+The current implementation does not feel to stable, by looking at how the car drives I believe the car may at some point, if left to keep doing laps, would go over or crash to the sides.
+
+Car had better stability at a constant and low speed.
+
+ 
 ## Dependencies
 
 * cmake >= 3.5

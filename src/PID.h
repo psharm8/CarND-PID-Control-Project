@@ -1,6 +1,8 @@
 #ifndef PID_H
 #define PID_H
 
+#include <vector>
+
 class PID {
 public:
   /*
@@ -16,6 +18,8 @@ public:
   double Kp;
   double Ki;
   double Kd;
+
+  double prev_cte;
 
   /*
   * Constructor
@@ -41,6 +45,8 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+
+    bool first;
 };
 
 #endif /* PID_H */
